@@ -28,7 +28,7 @@ interface LoginFormInputs {
 
 const onSubmit = async (data: LoginFormInputs): Promise<void> => {
     try {
-        await login(data.username, data.password);
+        await login({username: data.username, password: data.password});
         router.push('/dashboard');
     } catch (error) {
         alert('Invalid credentials.');
