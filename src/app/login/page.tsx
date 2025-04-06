@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useRouter } from 'next/navigation';
-// import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/authContext';
 
 const schema = yup.object().shape({
   username: yup.string().required('Username is required'),
@@ -11,7 +11,7 @@ const schema = yup.object().shape({
 });
 
 export default function Login() {
-//   const { login } = useAuth();
+  const { login  } = useAuth();
   const router = useRouter();
   const {
     register,
@@ -28,7 +28,7 @@ interface LoginFormInputs {
 
 const onSubmit = async (data: LoginFormInputs): Promise<void> => {
     try {
-        // await login(data.username, data.password);
+        await login(data.username, data.password);
         router.push('/dashboard');
     } catch (error) {
         alert('Invalid credentials.');

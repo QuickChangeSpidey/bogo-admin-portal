@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { signIn, signOut, getCurrentUser, AuthUser } from 'aws-amplify/auth';
 import { Amplify } from '@aws-amplify/core';
 import { ReactNode } from 'react';
@@ -20,7 +20,13 @@ interface AuthContextType {
     loading: boolean;
 }
 
-const AuthContext = createContext<AuthContextType | null>(null);
+const AuthContext = createContext<AuthContextType>({
+    user: null,
+    login: async () => Promise.reject("Login function not implemented"),
+    logout: async () => Promise.reject("Logout function not implemented"),
+    impersonate: () => {},
+    loading: false,
+});
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<AuthUser | null>(null);
